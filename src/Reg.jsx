@@ -16,12 +16,21 @@ function Reg() {
     const submit = async () => {
         try {
             const res = await axios.post(
-                "https://demo-12fl.onrender.com/register", // correct backend endpoint
+                "https://demo-12fl.onrender.com/register", // backend endpoint
                 data
             );
-            alert(res.data);
+            
+            // Show the message from backend
+            if (typeof res.data === "string") {
+                alert(res.data); // if backend returns plain string
+            } else if (res.data.message) {
+                alert(res.data.message); // if backend returns { message: "..." }
+            } else {
+                alert(JSON.stringify(res.data)); // fallback for objects
+            }
+
         } catch (xyz) {
-            alert(xyz.response?.data || "Error");
+            alert(xyz.response?.data?.message || xyz.response?.data || "Error");
         }
     };
 
@@ -35,5 +44,7 @@ function Reg() {
         </>
     );
 }
+
+
 
 export default Reg;
