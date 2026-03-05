@@ -15,7 +15,7 @@ function Reg() {
 
     const submit = async () => {
         try {
-            const res = await axios.post("https://demo-1.onrender.com/register",
+            const res = await axios.post("https://demo-12fl.onrender.com",
                 data
             )
             alert(res.data);
